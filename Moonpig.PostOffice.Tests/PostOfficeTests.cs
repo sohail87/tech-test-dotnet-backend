@@ -8,28 +8,35 @@
 
     public class PostOfficeTests
     {
+        private DateTime _mondayOrderDate;
+
+        public PostOfficeTests()
+        {
+            _mondayOrderDate = new DateTime(2020, 9, 28);
+        }
+
         [Fact]
         public void OneProductWithLeadTimeOfOneDay()
         {
             DespatchDateController controller = new DespatchDateController();
-            var date = controller.Get(new List<int>() {1}, DateTime.Now);
-            date.Date.Date.ShouldBe(DateTime.Now.Date.AddDays(1));
+            var date = controller.Get(new List<int>() {1}, _mondayOrderDate);
+            date.Date.Date.ShouldBe(_mondayOrderDate.Date.AddDays(1));
         }
 
         [Fact]
         public void OneProductWithLeadTimeOfTwoDay()
         {
             DespatchDateController controller = new DespatchDateController();
-            var date = controller.Get(new List<int>() { 2 }, DateTime.Now);
-            date.Date.Date.ShouldBe(DateTime.Now.Date.AddDays(2));
+            var date = controller.Get(new List<int>() { 2 }, _mondayOrderDate);
+            date.Date.Date.ShouldBe(_mondayOrderDate.Date.AddDays(2));
         }
 
         [Fact]
         public void OneProductWithLeadTimeOfThreeDay()
         {
             DespatchDateController controller = new DespatchDateController();
-            var date = controller.Get(new List<int>() { 3 }, DateTime.Now);
-            date.Date.Date.ShouldBe(DateTime.Now.Date.AddDays(3));
+            var date = controller.Get(new List<int>() { 3 }, _mondayOrderDate);
+            date.Date.Date.ShouldBe(_mondayOrderDate.Date.AddDays(3));
         }
 
         [Fact]
