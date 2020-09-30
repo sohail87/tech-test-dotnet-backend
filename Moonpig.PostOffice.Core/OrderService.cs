@@ -20,16 +20,7 @@ namespace Moonpig.PostOffice.Core
                 .Select(productId => _productRepository.GetProductLeadTime(productId))
                 .Max();
 
-            return new DespatchDate { Date = HandleWeekends(orderDate.AddDays(maxLeadTimeDays)) };
-        }
-
-        private static DateTime HandleWeekends(DateTime maxDespatchDate)
-        {
-            if (maxDespatchDate.DayOfWeek == DayOfWeek.Saturday)
-                return maxDespatchDate.AddDays(2);
-            if (maxDespatchDate.DayOfWeek == DayOfWeek.Sunday)
-                return maxDespatchDate.AddDays(1);
-            return maxDespatchDate;
+            return new DespatchDate { Date = orderDate.AddWorkingDays(maxLeadTimeDays)};
         }
     }
 }
