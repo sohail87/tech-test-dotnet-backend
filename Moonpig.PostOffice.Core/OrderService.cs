@@ -34,5 +34,7 @@ namespace Moonpig.PostOffice.Core
             ProductIds = productIds;
             OrderDate = orderDate;
         }
+
+        public DespatchDateRequest() { }
     }
 }
