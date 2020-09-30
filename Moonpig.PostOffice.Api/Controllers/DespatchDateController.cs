@@ -7,29 +7,51 @@
     using Microsoft.AspNetCore.Mvc;
     using Model;
 
+    public class OrderService
+    {
+        private DbContext _dbContext;
+
+        public OrderService(DbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        public DespatchDate GetDespatchDate(List<int> productIds, DateTime orderDate)
+        {
+            var maxDespatchDate = orderDate;
+
+            foreach (var productId in productIds)
+            {
+                var supplierId = _dbContext.Products.Single(x => x.ProductId == productId).SupplierId;
+                var leadTimeInDays = _dbContext.Suppliers.Single(x => x.SupplierId == supplierId).LeadTime;
+                if (orderDate.AddDays(leadTimeInDays) > maxDespatchDate)
+                    maxDespatchDate = orderDate.AddDays(leadTimeInDays);
+            }
+
+            if (maxDespatchDate.DayOfWeek == DayOfWeek.Saturday)
+                return new DespatchDate { Date = maxDespatchDate.AddDays(2) };
+            if (maxDespatchDate.DayOfWeek == DayOfWeek.Sunday)
+                return new DespatchDate { Date = maxDespatchDate.AddDays(1) };
+            return new DespatchDate { Date = maxDespatchDate };
+        }
+
+
+    }
+
     [Route("api/[controller]")]
     public class DespatchDateController : Controller
     {
-        public DateTime _mlt;
+        private OrderService _orderService;
+
+        public DespatchDateController()
+        {
+            _orderService = new OrderService(new DbContext());
+        }
 
         [HttpGet]
         public DespatchDate Get(List<int> productIds, DateTime orderDate)
         {
-            _mlt = orderDate; // max lead time
-            foreach (var ID in productIds)
-            {
-                DbContext dbContext = new DbContext();
-                var s = dbContext.Products.Single(x => x.ProductId == ID).SupplierId;
-                var lt = dbContext.Suppliers.Single(x => x.SupplierId == s).LeadTime;
-                if (orderDate.AddDays(lt) > _mlt)
-                    _mlt = orderDate.AddDays(lt);
-            }
-            if (_mlt.DayOfWeek == DayOfWeek.Saturday)
-            {
-                return new DespatchDate { Date = _mlt.AddDays(2) };
-            }
-            else if (_mlt.DayOfWeek == DayOfWeek.Sunday) return new DespatchDate { Date = _mlt.AddDays(1) };
-            else return new DespatchDate { Date = _mlt };
+            return _orderService.GetDespatchDate(productIds, orderDate);
         }
     }
 }
