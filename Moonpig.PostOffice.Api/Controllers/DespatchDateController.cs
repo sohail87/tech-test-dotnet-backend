@@ -3,12 +3,8 @@ using Moonpig.PostOffice.Core;
 
 namespace Moonpig.PostOffice.Api.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using Data;
     using Microsoft.AspNetCore.Mvc;
-
-
 
     [Route("api/[controller]")]
     public class DespatchDateController : Controller
@@ -21,9 +17,10 @@ namespace Moonpig.PostOffice.Api.Controllers
         }
 
         [HttpGet]
-        public DespatchDate Get(List<int> productIds, DateTime orderDate)
+        public DespatchDate Get(DespatchDateRequest request)
         {
-            return _orderService.GetDespatchDate(productIds, orderDate);
+            return _orderService.GetDespatchDate(request);
         }
     }
+     
 }

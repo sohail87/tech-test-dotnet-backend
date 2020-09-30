@@ -1,4 +1,6 @@
-﻿namespace Moonpig.PostOffice.Tests
+﻿using Moonpig.PostOffice.Core;
+
+namespace Moonpig.PostOffice.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -19,7 +21,7 @@
         public void OneProductWithLeadTimeOfOneDay()
         {
             DespatchDateController controller = new DespatchDateController();
-            var date = controller.Get(new List<int>() {1}, _mondayOrderDate);
+            var date = controller.Get(new DespatchDateRequest(new List<int>() {1}, _mondayOrderDate));
             date.Date.Date.ShouldBe(_mondayOrderDate.Date.AddDays(1));
         }
 
@@ -27,7 +29,7 @@
         public void OneProductWithLeadTimeOfTwoDay()
         {
             DespatchDateController controller = new DespatchDateController();
-            var date = controller.Get(new List<int>() { 2 }, _mondayOrderDate);
+            var date = controller.Get(new DespatchDateRequest(new List<int>() { 2 }, _mondayOrderDate));
             date.Date.Date.ShouldBe(_mondayOrderDate.Date.AddDays(2));
         }
 
@@ -35,7 +37,7 @@
         public void OneProductWithLeadTimeOfThreeDay()
         {
             DespatchDateController controller = new DespatchDateController();
-            var date = controller.Get(new List<int>() { 3 }, _mondayOrderDate);
+            var date = controller.Get(new DespatchDateRequest(new List<int>() { 3 }, _mondayOrderDate));
             date.Date.Date.ShouldBe(_mondayOrderDate.Date.AddDays(3));
         }
 
@@ -43,7 +45,7 @@
         public void SaturdayHasExtraTwoDays()
         {
             DespatchDateController controller = new DespatchDateController();
-            var date = controller.Get(new List<int>() { 1 }, new DateTime(2018,1,26));
+            var date = controller.Get(new DespatchDateRequest(new List<int>() { 1 }, new DateTime(2018,1,26)));
             date.Date.ShouldBe(new DateTime(2018, 1, 26).Date.AddDays(3));
         }
 
@@ -51,7 +53,7 @@
         public void SundayHasExtraDay()
         {
             DespatchDateController controller = new DespatchDateController();
-            var date = controller.Get(new List<int>() { 3 }, new DateTime(2018, 1, 25));
+            var date = controller.Get(new DespatchDateRequest(new List<int>() { 3 }, new DateTime(2018, 1, 25)));
             date.Date.ShouldBe(new DateTime(2018, 1, 25).Date.AddDays(4));
         }
     }

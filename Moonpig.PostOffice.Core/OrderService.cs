@@ -14,13 +14,25 @@ namespace Moonpig.PostOffice.Core
             _productRepository = productRepository;
         }
 
-        public DespatchDate GetDespatchDate(List<int> productIds, DateTime orderDate)
+        public DespatchDate GetDespatchDate(DespatchDateRequest request)
         {
-            var maxLeadTimeDays = productIds
+            var maxLeadTimeDays = request.ProductIds
                 .Select(productId => _productRepository.GetProductLeadTime(productId))
                 .Max();
 
-            return new DespatchDate { Date = orderDate.AddWorkingDays(maxLeadTimeDays)};
+            return new DespatchDate { Date = request.OrderDate.AddWorkingDays(maxLeadTimeDays)};
+        }
+    }
+
+    public class DespatchDateRequest
+    {
+        public List<int> ProductIds { get; set; }
+        public DateTime OrderDate { get; set; }
+
+        public DespatchDateRequest(List<int> productIds, DateTime orderDate)
+        {
+            ProductIds = productIds;
+            OrderDate = orderDate;
         }
     }
 }
