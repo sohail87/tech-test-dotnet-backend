@@ -10,4 +10,8 @@
     <PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Moonpig.PostOffice.Core\Moonpig.PostOffice.Core.csproj" />
+  </ItemGroup>
+
 </Project>
