@@ -48,6 +48,19 @@ namespace Moonpig.PostOffice.Tests
             }
         }
 
+        public class SupplierWithLongestLeadTimeIsUsedForCalculation : PostOfficeTests
+        {
+
+            [Fact]
+            public void MondayOrder_WithMaxLeadTimeOfTwoDays_HasDespathDateOfWednesday()
+            {
+                var mondayOrderDate = new DateTime(2020, 9, 28);
+                var date = _controller.Get(new DespatchDateRequest(new List<int>{1, 2}, mondayOrderDate));
+                date.Date.Date.ShouldBe(mondayOrderDate.Date.AddDays(2));
+            }
+
+        }
+
         public class DespatchDateIncorporatesWeekendClosure : PostOfficeTests
         {
         [Fact]
