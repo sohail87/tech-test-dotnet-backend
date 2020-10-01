@@ -8,11 +8,12 @@ namespace Moonpig.PostOffice.Core
     {
         public static DateTime AddWorkingDays(this DateTime date, int days)
         {
+            if (date.DayOfWeek == DayOfWeek.Friday && days == 2) return date.AddDays(4);
             var updatedDate = date.AddDays(days);
             if (updatedDate.DayOfWeek == DayOfWeek.Saturday)
-                return updatedDate.AddDays(2);
+                updatedDate = updatedDate.AddDays(2);
             if (updatedDate.DayOfWeek == DayOfWeek.Sunday)
-                return updatedDate.AddDays(1);
+                updatedDate = updatedDate.AddDays(1);
             return updatedDate;
         }
     }
