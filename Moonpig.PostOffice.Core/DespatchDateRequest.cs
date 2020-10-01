@@ -15,5 +15,10 @@ namespace Moonpig.PostOffice.Core
         }
 
         public DespatchDateRequest() { }
+
+        public static DespatchDateRequest SingleProduct(int productId, DateTime orderDate)
+        {
+            return new DespatchDateRequest(new List<int>{ productId }, orderDate);
+        }
     }
 }
