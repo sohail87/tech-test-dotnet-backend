@@ -70,11 +70,18 @@ namespace Moonpig.PostOffice.Tests
         public class SupplierLeadTimeIncorporatesWeekendClosure : PostOfficeTests
         {
             [Fact]
-            public void OneProductWithLeadTimeOfTwoDaysWillBeFourDays()
+            public void FridayOrderWithMaxLeadTimeOfTwoDaysWillBeFourDays()
             {
                 var orderDate = new DateTime(2020, 9, 25);
                 var date = _controller.Get(DespatchDateRequest.SingleProduct(2, orderDate));
                 date.Date.ShouldBe(orderDate.Date.AddDays(4));
+            }
+            [Fact]
+            public void ThursdayOrderWithMaxLeadTimeOfThreeDaysWillBeFiveDays()
+            {
+                var orderDate = new DateTime(2020, 10, 1);
+                var date = _controller.Get(DespatchDateRequest.SingleProduct(3, orderDate));
+                date.Date.ShouldBe(orderDate.Date.AddDays(5));
             }
         }
     }

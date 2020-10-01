@@ -6,15 +6,23 @@ namespace Moonpig.PostOffice.Core
 {
     public static class DateTimeExtensions
     {
-        public static DateTime AddWorkingDays(this DateTime date, int days)
+        public static DateTime AddWorkingDays(this DateTime dateTime, int days)
         {
-            if (date.DayOfWeek == DayOfWeek.Friday && days == 2) return date.AddDays(4);
-            var updatedDate = date.AddDays(days);
-            if (updatedDate.DayOfWeek == DayOfWeek.Saturday)
-                updatedDate = updatedDate.AddDays(2);
-            if (updatedDate.DayOfWeek == DayOfWeek.Sunday)
-                updatedDate = updatedDate.AddDays(1);
-            return updatedDate;
+            while (days != 0)
+            {
+                dateTime = dateTime.AddDays(1);
+
+                if (dateTime.IsWeekday())
+                    days -= 1;
+            }
+
+            return dateTime;
         }
+
+        private static bool IsWeekday(this DateTime dateTime) 
+            => !IsWeekend(dateTime);
+
+        private static bool IsWeekend(this DateTime dateTime) 
+            => dateTime.DayOfWeek == DayOfWeek.Saturday || dateTime.DayOfWeek == DayOfWeek.Sunday;
     }
 }
