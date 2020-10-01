@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Moonpig.PostOffice.Core
+namespace Moonpig.PostOffice.Core.Model
 {
     public class DespatchDateRequest
     {

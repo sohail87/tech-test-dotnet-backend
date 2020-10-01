@@ -1,5 +1,5 @@
-﻿using Moonpig.PostOffice.Api.Model;
-using Moonpig.PostOffice.Core;
+﻿using Moonpig.PostOffice.Core;
+using Moonpig.PostOffice.Core.Model;
 
 namespace Moonpig.PostOffice.Api.Controllers
 {

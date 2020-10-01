@@ -1,5 +1,6 @@
 ﻿using System.Linq;
-using Moonpig.PostOffice.Api.Model;
+using Moonpig.PostOffice.Core.Extensions;
+using Moonpig.PostOffice.Core.Model;
 
 namespace Moonpig.PostOffice.Core
 {

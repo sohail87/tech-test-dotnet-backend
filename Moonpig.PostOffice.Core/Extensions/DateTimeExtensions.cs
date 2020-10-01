@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Moonpig.PostOffice.Core
+namespace Moonpig.PostOffice.Core.Extensions
 {
     public static class DateTimeExtensions
     {
