@@ -17,32 +17,31 @@ namespace Moonpig.PostOffice.Tests
             _controller = new DespatchDateController();
         }
 
-        public class LeadTimeIsAddedToDespatchDate : PostOfficeTests
+        public class SingleProductLeadTimeIsAddedToDespatchDate : PostOfficeTests
         {
             private readonly DateTime _mondayOrderDate;
 
-            public LeadTimeIsAddedToDespatchDate()
+            public SingleProductLeadTimeIsAddedToDespatchDate()
             {
                 _mondayOrderDate = new DateTime(2020, 9, 28);
-
             }
 
             [Fact]
-            public void OneProductWithLeadTimeOfOneDay()
+            public void MondayOrder_WithLeadTimeOfOneDay_HasDespathDateOfTuesday()
             {
                 var date = _controller.Get(DespatchDateRequest.SingleProduct(1, _mondayOrderDate));
                 date.Date.Date.ShouldBe(_mondayOrderDate.Date.AddDays(1));
             }
 
             [Fact]
-            public void OneProductWithLeadTimeOfTwoDay()
+            public void MondayOrder_WithLeadTimeOfTwoDays_HasDespathDateOfWednesday()
             {
                 var date = _controller.Get(DespatchDateRequest.SingleProduct(2, _mondayOrderDate));
                 date.Date.Date.ShouldBe(_mondayOrderDate.Date.AddDays(2));
             }
 
             [Fact]
-            public void OneProductWithLeadTimeOfThreeDay()
+            public void MondayOrder_WithLeadTimeOfThreeDays_HasDespathDateOfThursday()
             {
                 var date = _controller.Get(DespatchDateRequest.SingleProduct(3, _mondayOrderDate));
                 date.Date.Date.ShouldBe(_mondayOrderDate.Date.AddDays(3));
@@ -64,7 +63,7 @@ namespace Moonpig.PostOffice.Tests
         {
             var orderDate = new DateTime(2018, 1, 25);
             var date = _controller.Get(DespatchDateRequest.SingleProduct(3, orderDate));
-            date.Date.ShouldBe(orderDate.Date.AddDays(4));
+            date.Date.ShouldBe(orderDate.Date.AddDays(5));
         }
 }
         public class SupplierLeadTimeIncorporatesWeekendClosure : PostOfficeTests
