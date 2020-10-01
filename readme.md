@@ -116,20 +116,20 @@ Q2. What best pracices have you used while implementing your solution?
    * Tell Don't Ask (Date Extension methods)
 
 Q3. What further steps would you take to improve the solution given more time?
-    * Tests for unhappy path i.e. no products or no date
-	* API ActionFilterAttribute to return bad request if model state is invalid
-    * API Global logging and error handling
-    * API Swagger Documentation
-	* DI framework injecting dependencies into controller
-    * Do we have an order id to lookup the products and order date? /order/{id}/despatch
+   * Tests for unhappy path i.e. no products or no date
+* API ActionFilterAttribute to return bad request if model state is invalid
+   * API Global logging and error handling
+   * API Swagger Documentation
+* DI framework injecting dependencies into controller
+   * Do we have an order id to lookup the products and order date? /order/{id}/despatch
 
 
 Q4. What's a technology that you're excited about and where do you see this 
     being applicable? (Your answer does not have to be related to this problem)
-    * Most recently AWS Athena. 
-    * Moving to serverless data persistence from using traditional relational databases has meant the ability to run adhoc queries is not available.
-    * Athena allows you to write SQL queries to get the information you need with little learning overhead.
-    * I'm generally excited by serverless services and how they can be utilised.
+   * Most recently AWS Athena. 
+   * Moving to serverless data persistence from using traditional relational databases has meant the ability to run adhoc queries is not available.
+   * Athena allows you to write SQL queries to get the information you need with little learning overhead.
+   * I'm generally excited by serverless services and how they can be utilised.
    
 
 ## Request and Response Examples
