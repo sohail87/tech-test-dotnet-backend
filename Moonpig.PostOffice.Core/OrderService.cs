@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Moonpig.PostOffice.Api.Model;
 
 namespace Moonpig.PostOffice.Core
@@ -22,19 +20,5 @@ namespace Moonpig.PostOffice.Core
 
             return new DespatchDate { Date = request.OrderDate.AddWorkingDays(maxLeadTimeDays)};
         }
-    }
-
-    public class DespatchDateRequest
-    {
-        public List<int> ProductIds { get; set; }
-        public DateTime OrderDate { get; set; }
-
-        public DespatchDateRequest(List<int> productIds, DateTime orderDate)
-        {
-            ProductIds = productIds;
-            OrderDate = orderDate;
-        }
-
-        public DespatchDateRequest() { }
     }
 }
