@@ -117,10 +117,10 @@ Q2. What best pracices have you used while implementing your solution?
 
 Q3. What further steps would you take to improve the solution given more time?
    * Tests for unhappy path i.e. no products or no date
-* API ActionFilterAttribute to return bad request if model state is invalid
+   * API ActionFilterAttribute to return bad request if model state is invalid
    * API Global logging and error handling
    * API Swagger Documentation
-* DI framework injecting dependencies into controller
+   * DI framework injecting dependencies into controller
    * Do we have an order id to lookup the products and order date? /order/{id}/despatch
 
 
