@@ -8,6 +8,8 @@ namespace Moonpig.PostOffice.Core
     {
         public static DateTime AddWorkingDays(this DateTime dateTime, int days)
         {
+            if (dateTime.IsWeekend()) days++;
+
             while (days != 0)
             {
                 dateTime = dateTime.AddDays(1);
