@@ -15,7 +15,7 @@ namespace Moonpig.PostOffice.Core
                 dateTime = dateTime.AddDays(1);
 
                 if (dateTime.IsWeekday())
-                    days -= 1;
+                    days--;
             }
 
             return dateTime;
