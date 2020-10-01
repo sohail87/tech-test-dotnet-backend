@@ -76,7 +76,6 @@ namespace Moonpig.PostOffice.Tests
                 date.Date.ShouldBe(new DateTime(2020, 10, 5));
             }
 
-
             [Fact]
             public void SaturdayOrder_WithLeadTimeOfOneDay_HasDespatchDateOfTuesday()
             {
@@ -84,6 +83,34 @@ namespace Moonpig.PostOffice.Tests
                 var date = _controller.Get(DespatchDateRequest.SingleProduct(1, orderDate));
                 date.Date.ShouldBe(new DateTime(2020, 10, 6));
             }
+
+            [Fact]
+            public void SundayOrder_WithLeadTimeOfOneDay_HasDespatchDateOfTuesday()
+            {
+                var orderDate = new DateTime(2020, 10, 4);
+                var date = _controller.Get(DespatchDateRequest.SingleProduct(1, orderDate));
+                date.Date.ShouldBe(new DateTime(2020, 10, 6));
+            }
+        }
+
+        public class LeadTimeOverMultipleWeeks : PostOfficeTests
+        {
+
+            [Fact]
+            public void FridayOrder_WithLeadTimeOfSixDays_HasDespatchDateOfSecondMonday()
+            {
+                var orderDate = new DateTime(2020, 10, 2);
+                var date = _controller.Get(DespatchDateRequest.SingleProduct(9, orderDate));
+                date.Date.ShouldBe(new DateTime(2020, 10, 12));
+            }
+            [Fact]
+            public void FridayOrder_WithLeadTimeOfElevenDays_HasDespatchDateOfThirdMonday()
+            {
+                var orderDate = new DateTime(2020, 10, 2);
+                var date = _controller.Get(DespatchDateRequest.SingleProduct(10, orderDate));
+                date.Date.ShouldBe(new DateTime(2020, 10, 19));
+            }
+
         }
     }
 }
